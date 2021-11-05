@@ -3,6 +3,8 @@ package cbook;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Objects;
+
 import exceptions.*;
 
 public class ContactBookInList implements ContactBook {
@@ -15,7 +17,7 @@ public class ContactBookInList implements ContactBook {
      * Default constructor
      */
     public ContactBookInList() {
-        contacts = new LinkedList<Contact>();
+        contacts = new LinkedList<>();
     }
 
     @Override
@@ -38,13 +40,6 @@ public class ContactBookInList implements ContactBook {
 
     @Override
     public void deleteContact(String name) throws ContactDoesNotExistException {
-        // A possible alternative would be:
-        // Contact c = this.getContact(name);
-        // contacts.remove(c);
-        // but this requires two searches in the list.
-        // The following solution requires an equals(Object o) method
-        // implemented in the ContactClass and a constructor that receives the name
-        // as its single argument.
         if (has_Contact(name))
             contacts.remove(new ContactClass(name));
         else
@@ -54,7 +49,7 @@ public class ContactBookInList implements ContactBook {
     @Override
     public int getPhone(String name) throws ContactDoesNotExistException {
         if (has_Contact(name))
-            return this.getContact(name).getPhone();
+            return Objects.requireNonNull(this.getContact(name)).getPhone();
         else
             throw new ContactDoesNotExistException();
     }
@@ -62,7 +57,7 @@ public class ContactBookInList implements ContactBook {
     @Override
     public String getEmail(String name) throws ContactDoesNotExistException {
         if (has_Contact(name))
-            return this.getContact(name).getEmail();
+            return Objects.requireNonNull(this.getContact(name)).getEmail();
         else
             throw new ContactDoesNotExistException();
     }
@@ -70,7 +65,7 @@ public class ContactBookInList implements ContactBook {
     @Override
     public void setPhone(String name, int phone) throws ContactDoesNotExistException {
         if (has_Contact(name))
-            this.getContact(name).setPhone(phone);
+            Objects.requireNonNull(this.getContact(name)).setPhone(phone);
         else
             throw new ContactDoesNotExistException();
     }
@@ -78,7 +73,7 @@ public class ContactBookInList implements ContactBook {
     @Override
     public void setEmail(String name, String email) throws ContactDoesNotExistException {
         if (has_Contact(name))
-            this.getContact(name).setEmail(email);
+            Objects.requireNonNull(this.getContact(name)).setEmail(email);
         else
             throw new ContactDoesNotExistException();
     }
