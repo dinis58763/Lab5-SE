@@ -6,6 +6,18 @@ import java.util.Scanner;
 import cbook.*;
 import exceptions.*;
 
+/**
+ * Main program for the application ContactBook.
+ *
+ * Note: We used NOSONAR so that SonarLint does not consider the use of prints incorrect.
+ * Although SonarLint advised us to use log instead of prints, we choose not to because
+ * the output will become polluted with timestamps from the log, this is specially
+ * notable when we print all contacts, on top of that the output will not match with the
+ * one on the junit tests
+ *
+ *
+ */
+
 public class Main {
     private static final String NOT_A_VALID_PHONE_NUMBER = "Not a valid phone number.";
 
@@ -158,20 +170,24 @@ public class Main {
         try {
             String name;
             int phone;
+            phone = in.nextInt();
             name = in.nextLine();
-            try {
-                phone = in.nextInt();
-                in.nextLine();
-                cBook.setPhone(name, phone);
-                System.out.println(Main.CONTACT_UPDATED);   //NOSONAR
-            } catch (InputMismatchException e) {
-                in.nextLine();
-                System.out.println(Main.NOT_A_VALID_PHONE_NUMBER);  //NOSONAR
-            } catch (ContactDoesNotExistException e) {
-                System.out.println(Main.NAME_NOT_EXIST);    //NOSONAR
-            }
+            setPhoneAux(in, cBook, phone, name);
         } catch (InputMismatchException e) {
             System.out.println(e.getMessage()); //NOSONAR
+        }
+    }
+
+    private static void setPhoneAux(Scanner in, ContactBook cBook, int phone, String name) {
+        try {
+            in.nextLine();
+            cBook.setPhone(name, phone);
+            System.out.println(Main.CONTACT_UPDATED);   //NOSONAR
+        } catch (InputMismatchException e) {
+            in.nextLine();
+            System.out.println(Main.NOT_A_VALID_PHONE_NUMBER);  //NOSONAR
+        } catch (ContactDoesNotExistException e) {
+            System.out.println(Main.NAME_NOT_EXIST);    //NOSONAR
         }
     }
 
