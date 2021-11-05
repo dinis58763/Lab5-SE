@@ -169,8 +169,7 @@ public class Main {
     private static void setPhone(Scanner in, ContactBook cBook) {
         try {
             String name;
-            int phone;
-            phone = in.nextInt();
+            int phone = 0;
             name = in.nextLine();
             setPhoneAux(in, cBook, phone, name);
         } catch (InputMismatchException e) {
@@ -180,6 +179,7 @@ public class Main {
 
     private static void setPhoneAux(Scanner in, ContactBook cBook, int phone, String name) {
         try {
+            phone = in.nextInt();
             in.nextLine();
             cBook.setPhone(name, phone);
             System.out.println(Main.CONTACT_UPDATED);   //NOSONAR
