@@ -11,7 +11,7 @@ public interface ContactBook {
      * @return <code>true</code> if the contact with <code>name</code> exists,
      * <code>false</code> otherwise
      */
-    boolean has_Contact(String name);
+    boolean hasContact(String name);
 
     /**
      * Returns the number of existing contacts
@@ -23,13 +23,14 @@ public interface ContactBook {
      * Adds a new contact to the contact book
      * @param name the name of this contact
      * @param email the email address of this contact
+     * @throws ContactAlreadyExistsException throws an exception if contact already exists
      */
     void addContact(String name, int phone, String email) throws ContactAlreadyExistsException;
 
     /**
      * Removes a contact given its name
      * @param name the name of the contact to remove
-     * @throws ContactDoesNotExistException
+     * @throws ContactDoesNotExistException throws an exception if contact doesn't exist
      */
     void deleteContact(String name) throws ContactDoesNotExistException;
 
@@ -37,7 +38,7 @@ public interface ContactBook {
      * Checks the phone number of a contact given its name
      * @param name of the contact to get the phone number from
      * @return the phone number of the contact
-     * @throws ContactDoesNotExistException
+     * @throws ContactDoesNotExistException throws an exception if contact doesn't exist
      */
     int getPhone(String name) throws ContactDoesNotExistException;
 
@@ -45,7 +46,7 @@ public interface ContactBook {
      * Gets the email address of a contact, given its name
      * @param name the name of the contact for which we want to get the email address
      * @return the email address of the associated contact
-     * @throws ContactDoesNotExistException
+     * @throws ContactDoesNotExistException throws an exception if contact doesn't exist
      */
     String getEmail(String name) throws ContactDoesNotExistException;
 
@@ -53,7 +54,7 @@ public interface ContactBook {
      * Updates the phone number of this contact
      * @param name the name of the contact of which the phone number is to be updated
      * @param phone the new phone number of this contact
-     * @throws ContactDoesNotExistException
+     * @throws ContactDoesNotExistException throws an exception if contact doesn't exist
      */
     void setPhone(String name, int phone) throws ContactDoesNotExistException;
 
@@ -61,7 +62,7 @@ public interface ContactBook {
      * Updates the email address of the contact with the given name
      * @param name the name of the contact whose email is being updated
      * @param email the new email address
-     * @throws ContactDoesNotExistException
+     * @throws ContactDoesNotExistException throws an exception if contact doesn't exist
      */
     void setEmail(String name, String email) throws ContactDoesNotExistException;
 
@@ -70,5 +71,4 @@ public interface ContactBook {
      * @return an iterator to all contacts
      */
     Iterator<Contact> listContacts();
-
 }

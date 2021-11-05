@@ -3,7 +3,7 @@ package cbook;
 /**
  * By removing the public visibility, this class is no longer visible outside the package
  */
-class ContactClass implements Contact {
+public class ContactClass implements  Contact{
     /**
      * Contact name.
      */
@@ -30,7 +30,7 @@ class ContactClass implements Contact {
 
     /**
      * Constructor with just the name. Leaves the phone number at 0, and the email address to null.
-     * @param name
+     * @param name name of the contact
      */
     public ContactClass(String name) {
         this(name, 0, null);
@@ -67,13 +67,10 @@ class ContactClass implements Contact {
 
         if (obj == null) return false;
 
-        if (!(obj instanceof Contact)) return false;
-
-        Contact other = (Contact) obj;
+        if (!(obj instanceof Contact other)) return false;
 
         if (name == null) {
-            if (other.getName() != null) return false;
-            else return true;
+            return other.getName() == null;
         }
         else return name.equals(other.getName());
     }

@@ -3,9 +3,7 @@ package main;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import cbook.Contact;
-import cbook.ContactBook;
-import cbook.ContactBookInList;
+import cbook.*;
 import exceptions.*;
 
 /**
@@ -15,7 +13,6 @@ public class Main {
     private static final String NOT_A_VALID_PHONE_NUMBER = "Not a valid phone number.";
 
     // Constants for defining the user feedback
-    public static final String CONTACT_EXISTS = "Contact already exists.";
     public static final String NAME_NOT_EXIST = "Contact does not exist.";
     public static final String CONTACT_ADDED = "Contact added.";
     public static final String CONTACT_REMOVED = "Contact removed.";
@@ -32,54 +29,41 @@ public class Main {
 
         private final String commandInputName;
 
-        private Command(String commandInputName) {
+        Command(String commandInputName) {
             this.commandInputName = commandInputName;
         }
 
         public String getCommandInputName() {
             return commandInputName;
         }
-    };
+    }
 
     /**
      * main.Main program. Runs the command interpreter.
      * @param args - arguments for executing the program. Not used in this program.
      */
     public static void main(String[] args) {
-        Main.execute_commands();
+        Main.executeCommands();
     }
 
     /**
      * Command interpreter.
      */
-    private static void execute_commands() {
+    private static void executeCommands() {
         Scanner in = new Scanner(System.in);
         ContactBook cBook = new ContactBookInList();
         Command comm = readCommand(in);
         while (!comm.equals(Command.QUIT)){
             switch (comm) {
-                case ADD_CONTACT:
-                    addContact(in,cBook);
-                    break;
-                case REMOVE_CONTACT:
-                    deleteContact(in,cBook);
-                    break;
-                case GET_PHONE:
-                    getPhone(in,cBook);
-                    break;
-                case GET_EMAIL:
-                    getEmail(in,cBook);
-                    break;
-                case SET_PHONE:
-                    setPhone(in,cBook);
-                    break;
-                case SET_EMAIL:
-                    setEmail(in,cBook);
-                    break;
-                case LIST_CONTACTS:
-                    listAllContacts(cBook);
-                    break;
-                default:
+                case ADD_CONTACT -> addContact(in, cBook);
+                case REMOVE_CONTACT -> deleteContact(in, cBook);
+                case GET_PHONE -> getPhone(in, cBook);
+                case GET_EMAIL -> getEmail(in, cBook);
+                case SET_PHONE -> setPhone(in, cBook);
+                case SET_EMAIL -> setEmail(in, cBook);
+                case LIST_CONTACTS -> listAllContacts(cBook);
+                default -> {
+                }
             }
             System.out.println();
             comm = readCommand(in);
@@ -102,7 +86,7 @@ public class Main {
     }
 
     /**
-     * Adds a new contact, if it dose not exist. If it already exists, this
+     * Adds a new contact, if it does not exist. If it already exists, this
      * does nothing
      * @param in input from which data is read
      * @param cBook ContactBook in which we want to add a new contact
