@@ -48,11 +48,6 @@ public class ContactBookInList implements ContactBook {
     }
 
     @Override
-    /*
-        Although we donÂ´t formally test the null point exception we can guarantee that it will never
-        return a null, because hasContact(name) verification guarantee it
-     */
-
     public int getPhone(String name) throws ContactDoesNotExistException {
         if (hasContact(name))
             return Objects.requireNonNull(this.getContact(name)).getPhone();
@@ -61,6 +56,11 @@ public class ContactBookInList implements ContactBook {
     }
 
     @Override
+    /*
+        Although we donÂ´t formally test the null point exception we can guarantee that it will never
+        return a null, because hasContact(name) verification guarantee it
+     */
+
     public String getEmail(String name) throws ContactDoesNotExistException {
         if (hasContact(name))
             return Objects.requireNonNull(this.getContact(name)).getEmail();

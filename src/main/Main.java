@@ -6,9 +6,6 @@ import java.util.Scanner;
 import cbook.*;
 import exceptions.*;
 
-/**
- * main.Main program for the application ContactBook.
- */
 public class Main {
     private static final String NOT_A_VALID_PHONE_NUMBER = "Not a valid phone number.";
 
@@ -39,7 +36,7 @@ public class Main {
     }
 
     /**
-     * main.Main program. Runs the command interpreter.
+     * Main program. Runs the command interpreter.
      * @param args - arguments for executing the program. Not used in this program.
      */
     public static void main(String[] args) {
@@ -62,14 +59,12 @@ public class Main {
                 case SET_PHONE -> setPhone(in, cBook);
                 case SET_EMAIL -> setEmail(in, cBook);
                 case LIST_CONTACTS -> listAllContacts(cBook);
-                default -> {
-                }
+                default -> System.out.println(ERROR);   //NOSONAR
             }
-            System.out.println();
+            System.out.println();   //NOSONAR
             comm = readCommand(in);
         }
-        System.out.println(EXIT);
-        System.out.println();
+        System.out.println(EXIT+"\n");  //NOSONAR
         in.close();
     }
 
@@ -98,13 +93,13 @@ public class Main {
             in.nextLine();
             String email = in.nextLine();
             cBook.addContact(name, phone, email);
-            System.out.println(Main.CONTACT_ADDED);
+            System.out.println(Main.CONTACT_ADDED); //NOSONAR
         } catch (InputMismatchException e) {
-            System.out.println(NOT_A_VALID_PHONE_NUMBER);
+            System.out.println(NOT_A_VALID_PHONE_NUMBER);   //NOSONAR
             in.nextLine();
             in.nextLine();
         } catch (ContactAlreadyExistsException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage()); //NOSONAR
         }
     }
 
@@ -118,9 +113,9 @@ public class Main {
         name = in.nextLine();
         try {
             cBook.deleteContact(name);
-            System.out.println(Main.CONTACT_REMOVED);
+            System.out.println(Main.CONTACT_REMOVED);   //NOSONAR
         } catch (ContactDoesNotExistException e) {
-            System.out.println(Main.NAME_NOT_EXIST);
+            System.out.println(Main.NAME_NOT_EXIST);    //NOSONAR
         }
     }
 
@@ -133,9 +128,9 @@ public class Main {
         String name;
         name = in.nextLine();
         try {
-            System.out.println(cBook.getPhone(name));
+            System.out.println(cBook.getPhone(name));   //NOSONAR
         } catch (ContactDoesNotExistException e) {
-            System.out.println(Main.NAME_NOT_EXIST);
+            System.out.println(Main.NAME_NOT_EXIST);    //NOSONAR
         }
     }
 
@@ -148,9 +143,9 @@ public class Main {
         String name;
         name = in.nextLine();
         try {
-            System.out.println(cBook.getEmail(name));
+            System.out.println(cBook.getEmail(name));   //NOSONAR
         } catch (ContactDoesNotExistException e) {
-            System.out.println(Main.NAME_NOT_EXIST);
+            System.out.println(Main.NAME_NOT_EXIST);    //NOSONAR
         }
     }
 
@@ -168,15 +163,15 @@ public class Main {
                 phone = in.nextInt();
                 in.nextLine();
                 cBook.setPhone(name, phone);
-                System.out.println(Main.CONTACT_UPDATED);
+                System.out.println(Main.CONTACT_UPDATED);   //NOSONAR
             } catch (InputMismatchException e) {
                 in.nextLine();
-                System.out.println(Main.NOT_A_VALID_PHONE_NUMBER);
+                System.out.println(Main.NOT_A_VALID_PHONE_NUMBER);  //NOSONAR
             } catch (ContactDoesNotExistException e) {
-                System.out.println(Main.NAME_NOT_EXIST);
+                System.out.println(Main.NAME_NOT_EXIST);    //NOSONAR
             }
         } catch (InputMismatchException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage()); //NOSONAR
         }
     }
 
@@ -192,9 +187,9 @@ public class Main {
         email = in.nextLine();
         try {
             cBook.setEmail(name,email);
-            System.out.println(Main.CONTACT_UPDATED);
+            System.out.println(Main.CONTACT_UPDATED);   //NOSONAR
         } catch (ContactDoesNotExistException e) {
-            System.out.println(Main.NAME_NOT_EXIST);
+            System.out.println(Main.NAME_NOT_EXIST);    //NOSONAR
         }
     }
 
@@ -206,8 +201,8 @@ public class Main {
         if (cBook.getNumberOfContacts() != 0) {
             java.util.Iterator<Contact> it = cBook.listContacts();
             while(it.hasNext())
-                System.out.println(it.next());
+                System.out.println(it.next());  //NOSONAR
         }
-        else System.out.println(Main.BOOK_EMPTY);
+        else System.out.println(Main.BOOK_EMPTY);   //NOSONAR
     }
 }

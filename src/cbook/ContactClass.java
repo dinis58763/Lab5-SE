@@ -3,11 +3,11 @@ package cbook;
 /**
  * By removing the public visibility, this class is no longer visible outside the package
  */
-public class ContactClass implements  Contact{
+class ContactClass implements Contact {
     /**
      * Contact name.
      */
-    String name;
+    private final String name;
 
     /**
      * Contact phone number.
@@ -62,6 +62,11 @@ public class ContactClass implements  Contact{
     }
 
     @Override
+    public int hashCode(){
+        return name.hashCode();
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
 
@@ -70,7 +75,7 @@ public class ContactClass implements  Contact{
         if (!(obj instanceof Contact other)) return false;
 
         if (name == null) {
-            return other.getName() == null;
+            return other.getName() != null;
         }
         else return name.equals(other.getName());
     }
