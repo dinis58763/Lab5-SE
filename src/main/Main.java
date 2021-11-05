@@ -169,17 +169,16 @@ public class Main {
     private static void setPhone(Scanner in, ContactBook cBook) {
         try {
             String name;
-            int phone = 0;
             name = in.nextLine();
-            setPhoneAux(in, cBook, phone, name);
+            setPhoneAux(in, cBook, name);
         } catch (InputMismatchException e) {
             System.out.println(e.getMessage()); //NOSONAR
         }
     }
 
-    private static void setPhoneAux(Scanner in, ContactBook cBook, int phone, String name) {
+    private static void setPhoneAux(Scanner in, ContactBook cBook, String name) {
         try {
-            phone = in.nextInt();
+            int phone = in.nextInt();
             in.nextLine();
             cBook.setPhone(name, phone);
             System.out.println(Main.CONTACT_UPDATED);   //NOSONAR
